@@ -2,25 +2,25 @@ class Solution {
 public:
     bool hasIncreasingSubarrays(vector<int>& nums, int k) {
         int n=nums.size();
-        if(n<2*k)return false;
-        for(int i=0;i+2*k<=n;i++){
-            bool firstSub=false,secSub=false;
-            for(int j=i;j<i+k-1;j++){
-                if(nums[j]>=nums[j+1]){
-                    firstSub=true;
-                    break;
-                }
+        if(n<2*k)return 0;
 
+        int prev=0,curr=1;
+
+        for(int i=1;i<n;i++){
+            if(nums[i]>nums[i-1]){
+                curr++;
+                cout<<curr<<" ";
             }
-            for(int j=i+k;j<i+2*k-1;j++){
-                if(nums[j]>=nums[j+1]){
-                    secSub=true;
-                    break;
-                }
-           
+
+            else{
+                if(curr>=2*k||min(prev,curr)>=k)return true;
+
+                prev=curr;
+                curr=1;
             }
-             if(!firstSub&&!secSub)return true;
         }
-        return false;
+        if(curr>=2*k||min(prev,curr)>=k)return true;
+
+        return 0;
     }
 };
