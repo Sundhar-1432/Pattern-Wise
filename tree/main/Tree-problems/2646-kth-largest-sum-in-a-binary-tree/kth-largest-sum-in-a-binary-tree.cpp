@@ -28,7 +28,7 @@ public:
             arr.push_back(sum);
         }
         if(k>arr.size())return -1;
-        sort(arr.begin(),arr.end());
+        nth_element(arr.begin(), arr.end() - k, arr.end());
 
         return arr[arr.size()-k];
     }
